@@ -1,0 +1,30 @@
+version: "3.0"
+
+services:
+  #database:
+  #  container_name: quizz_db
+
+  nginx:
+    image: nginx:latest
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html/
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+
+
+  php-fpm:
+      image: php:7.4-fpm
+      build:
+        context: ./docker/php-fpm
+        dockerfile: DockerFile
+      working_dir: /var/www/html/src
+      volumes:
+        - ./:/var/www/html
+      ports:
+        - 9000:9001
+
+
