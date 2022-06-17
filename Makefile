@@ -6,10 +6,16 @@ DOCKER_COMPOSE_EXEC=$(DOCKER_COMPOSE) exec
 PHP_DOCKER_COMPOSE_EXEC=$(DOCKER_COMPOSE_EXEC) php-fpm
 
 #DOCKER
-start: ## Start docker containers
+build: ## Build docker container
+	$(DOCKER_COMPOSE) build
+
+start: ## Start docker container
 	$(DOCKER_COMPOSE) up -d
 
-down: ## Stop docker containers
+stop: ## Stop docker container
+	$(DOCKER_COMPOSE) stop
+
+down: ## Stop docker container
 	$(DOCKER_COMPOSE) down
 
 php-fpm : ## Run bash in php-fpm container
